@@ -1,4 +1,7 @@
 {
-  "TITLE": "Welcomessssssssssss to the Quiz Game!",
-  "BUTTON_TEXT": "Start Game"
+  "WELCOME": "Welcome to the Quiz Game!",
+  "SELECT_OPTION": "Choose an option to get started",
+  "CREATE_GAME": "Create Game",
+  "JOIN_GAME": "Join Game",
+  "LANGUAGE": "Language"
 }
