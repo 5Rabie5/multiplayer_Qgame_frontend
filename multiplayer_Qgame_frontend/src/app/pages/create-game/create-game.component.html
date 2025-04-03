@@ -1,1 +1,57 @@
-<p>create-game works!</p>
+<div class="landing-container">
+  <div class="card">
+    <h2>{{ 'CREATE_GAME' | translate }}</h2>
+
+    <form class="form-group">
+      <!-- Room Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ROOM_NAME' | translate }}</mat-label>
+        <input matInput placeholder="Quiz Night" />
+      </mat-form-field>
+
+      <!-- Win Points -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'WIN_POINTS' | translate }}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let points of [100,200,500,1000,'Unlimited']" [value]="points">
+            {{ points }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Player Count -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PLAYER_COUNT' | translate }}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let count of [2,3,4,5,6,7,8,9,10,'Unlimited']" [value]="count">
+            {{ count }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Categories -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'CATEGORIES' | translate }}</mat-label>
+        <mat-select multiple [(value)]="selectedCategories">
+          <mat-option *ngFor="let cat of categories" [value]="cat">
+            {{ cat }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <!-- Difficulty -->
+      <label class="section-label">{{ 'DIFFICULTY' | translate }}</label>
+      <mat-radio-group>
+        <mat-radio-button *ngFor="let level of ['Easy', 'Medium', 'Hard']" [value]="level">
+          {{ level }}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" class="submit-button">
+        {{ 'CREATE' | translate }}
+      </button>
+    </form>
+  </div>
+</div>

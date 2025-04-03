@@ -1,7 +1,9 @@
 {
-  "WELCOME": "Welcome to the Quiz Game!",
-  "SELECT_OPTION": "Choose an option to get started",
   "CREATE_GAME": "Create Game",
-  "JOIN_GAME": "Join Game",
-  "LANGUAGE": "Language"
+  "ROOM_NAME": "Game Room Name",
+  "WIN_POINTS": "Win Points",
+  "PLAYER_COUNT": "Player Count",
+  "CATEGORIES": "Select Categories",
+  "DIFFICULTY": "Difficulty",
+  "CREATE": "Create"
 }

@@ -1,7 +1,9 @@
 {
-  "WELCOME": "Willkommen beim Quizspiel!",
-  "SELECT_OPTION": "Wähle eine Option zum Starten",
   "CREATE_GAME": "Spiel erstellen",
-  "JOIN_GAME": "Spiel beitreten",
-  "LANGUAGE": "Sprache"
+  "ROOM_NAME": "Spielraumname",
+  "WIN_POINTS": "Siegpunkte",
+  "PLAYER_COUNT": "Spieleranzahl",
+  "CATEGORIES": "Kategorien auswählen",
+  "DIFFICULTY": "Schwierigkeitsgrad",
+  "CREATE": "Erstellen"
 }
