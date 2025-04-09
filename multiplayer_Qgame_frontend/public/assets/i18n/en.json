@@ -22,5 +22,11 @@
   "CODE": "Game Code",
   "COPY_CODE": "Copy Code",
   "JOINED_PLAYERS": "Joined Players",
-  "START_GAME": "Start Game"
+  "START_GAME": "Start Game",
+  "GAME_MODE": "Game Mode",
+  "FASTEST_ANSWER": "Fastest Answer",
+  "TIMED_QUESTION": "Timed Question",
+  "WAIT_ALL_PLAYERS": "Wait for all players",
+  "NEXT_AFTER_SECONDS": "Auto next after seconds",
+  "SECONDS_PER_QUESTION": "Seconds per question"
 }

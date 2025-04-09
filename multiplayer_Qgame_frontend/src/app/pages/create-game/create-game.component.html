@@ -56,6 +56,34 @@
         </mat-select>
       </mat-form-field>
 
+
+      <!-- Game Mode -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'GAME_MODE' | translate }}</mat-label>
+        <mat-select [value]="gameMode" (selectionChange)="gameMode = $event.value">
+          <mat-option value="FASTEST_ANSWER">{{ 'FASTEST_ANSWER' | translate }}</mat-option>
+          <mat-option value="TIMED_QUESTION">{{ 'TIMED_QUESTION' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Timer Mode (only when gameMode is TIMED_QUESTION) -->
+      <div *ngIf="gameMode === 'TIMED_QUESTION'">
+        <mat-radio-group [value]="timedOption" (change)="onTimedOptionChange($event.value)">
+          <mat-radio-button value="WAIT_ALL_PLAYERS">
+            {{ 'WAIT_ALL_PLAYERS' | translate }}
+          </mat-radio-button>
+          <mat-radio-button value="NEXT_AFTER_SECONDS">
+            {{ 'NEXT_AFTER_SECONDS' | translate }}
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <!-- Seconds Input -->
+        <mat-form-field *ngIf="timedOption === 'NEXT_AFTER_SECONDS'" appearance="outline">
+          <mat-label>{{ 'SECONDS_PER_QUESTION' | translate }}</mat-label>
+          <input matInput type="number" [value]="secondsPerQuestion" (input)="secondsPerQuestion = $any($event.target).value" />
+        </mat-form-field>
+      </div>
+
       <!-- Difficulty -->
       <label class="section-label">{{ 'DIFFICULTY' | translate }}</label>
       <mat-radio-group
@@ -69,7 +97,6 @@
           {{ level.label | translate }}
         </mat-radio-button>
       </mat-radio-group>
-
       <!-- Submit Button -->
       <div class="form-actions">
         <button

@@ -22,5 +22,11 @@
   "SELECT_CATEGORIES": "اختر التصنيفات",
   "EASY": "سهل",
   "MEDIUM": "متوسط",
-  "HARD": "صعب"
+  "HARD": "صعب",
+   "GAME_MODE": "نمط اللعبة",
+   "FASTEST_ANSWER": "من يجيب أولاً",
+   "TIMED_QUESTION": "الأسئلة مع وقت",
+   "WAIT_ALL_PLAYERS": "انتظر الجميع",
+   "NEXT_AFTER_SECONDS": "انتقل بعد عدد ثوانٍ",
+   "SECONDS_PER_QUESTION": "ثواني لكل سؤال"
 }

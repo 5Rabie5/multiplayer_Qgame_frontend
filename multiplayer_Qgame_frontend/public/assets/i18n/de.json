@@ -22,5 +22,11 @@
   "CODE": "Spielcode",
   "COPY_CODE": "Code kopieren",
   "JOINED_PLAYERS": "Beigetretene Spieler",
-  "START_GAME": "Spiel starten"
+  "START_GAME": "Spiel starten",
+  "GAME_MODE": "Spielmodus",
+  "FASTEST_ANSWER": "Schnellste Antwort",
+  "TIMED_QUESTION": "Fragen mit Zeit",
+  "WAIT_ALL_PLAYERS": "Warte auf alle Spieler",
+  "NEXT_AFTER_SECONDS": "Automatisch weiter nach Sekunden",
+  "SECONDS_PER_QUESTION": "Sekunden pro Frage"
 }

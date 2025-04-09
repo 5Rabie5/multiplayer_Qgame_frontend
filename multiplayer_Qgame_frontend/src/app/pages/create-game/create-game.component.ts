@@ -48,6 +48,10 @@ export class CreateGameComponent {
     { label: 'MEDIUM', value: 'medium' },
     { label: 'HARD', value: 'hard' }
   ];
+  gameMode: string = 'FASTEST_ANSWER';
+  timedOption: string = 'WAIT_ALL_PLAYERS';
+  secondsPerQuestion: number = 10;
+
 
   constructor(public translate: TranslateService, private router: Router) {
     this.loadCategories(translate.currentLang);
@@ -79,5 +83,8 @@ export class CreateGameComponent {
     this.router.navigate(['/admin-dashboard'], {
       queryParams: { code: gameCode }
     });
+  }
+  onTimedOptionChange(option: string) {
+    this.timedOption = option;
   }
 }
