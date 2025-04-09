@@ -1,4 +1,5 @@
 {
+  "JOIN_GAME":"JOIN_GAME",
   "CREATE_GAME": "Create Game",
   "ROOM_NAME": "Game Room Name",
   "WIN_POINTS": "Win Points",
@@ -11,5 +12,15 @@
   "BUTTON": "Join",
   "CHARACTER_HERO": "Hero",
   "CHARACTER_ROBOT": "Robot",
-  "CHARACTER_GIRL": "Girl"
+  "CHARACTER_GIRL": "Girl",
+  "GAME_ROOM_NAME": "Game Room Name",
+  "SELECT_CATEGORIES": "Select Categories",
+  "EASY": "Easy",
+  "MEDIUM": "Medium",
+  "HARD": "Hard",
+  "GAME_ROOM": "Game Room",
+  "CODE": "Game Code",
+  "COPY_CODE": "Copy Code",
+  "JOINED_PLAYERS": "Joined Players",
+  "START_GAME": "Start Game"
 }

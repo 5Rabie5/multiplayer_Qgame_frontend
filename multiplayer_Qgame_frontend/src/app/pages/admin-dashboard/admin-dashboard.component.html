@@ -1,0 +1,22 @@
+<div class="dashboard-container">
+  <mat-card class="game-info">
+    <h2>{{ 'GAME_ROOM' | translate }}</h2>
+    <p><strong>{{ 'CODE' | translate }}:</strong> {{ gameCode }}</p>
+    <button mat-raised-button color="primary" (click)="copyCode()">
+      {{ 'COPY_CODE' | translate }}
+    </button>
+  </mat-card>
+
+  <mat-card class="player-list">
+    <h3>{{ 'JOINED_PLAYERS' | translate }}</h3>
+    <ul>
+      <li *ngFor="let player of players">
+        {{ player }}
+      </li>
+    </ul>
+  </mat-card>
+
+  <button mat-raised-button color="accent" (click)="startGame()">
+    {{ 'START_GAME' | translate }}
+  </button>
+</div>

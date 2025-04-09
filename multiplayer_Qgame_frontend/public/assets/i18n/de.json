@@ -1,4 +1,5 @@
 {
+  "JOIN_GAME":"SPIEL BEITRETEN",
   "CREATE_GAME": "Spiel erstellen",
   "ROOM_NAME": "Spielraumname",
   "WIN_POINTS": "Siegpunkte",
@@ -11,5 +12,15 @@
   "BUTTON": "Beitreten",
   "CHARACTER_HERO": "Held",
   "CHARACTER_ROBOT": "Roboter",
-  "CHARACTER_GIRL": "Mädchen"
+  "CHARACTER_GIRL": "Mädchen",
+  "GAME_ROOM_NAME": "Spielraum-Name",
+  "SELECT_CATEGORIES": "Kategorien auswählen",
+  "EASY": "Einfach",
+  "MEDIUM": "Mittel",
+  "HARD": "Schwierig",
+  "GAME_ROOM": "Spielraum",
+  "CODE": "Spielcode",
+  "COPY_CODE": "Code kopieren",
+  "JOINED_PLAYERS": "Beigetretene Spieler",
+  "START_GAME": "Spiel starten"
 }

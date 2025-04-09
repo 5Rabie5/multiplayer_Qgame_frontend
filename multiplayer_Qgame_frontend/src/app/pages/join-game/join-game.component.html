@@ -1,13 +1,13 @@
 <div class="container">
   <!-- اسم اللاعب -->
   <mat-form-field appearance="outline">
-    <mat-label>{{ 'JOIN.PLAYER_NAME' | translate }}</mat-label>
+    <mat-label>{{ 'PLAYER_NAME' | translate }}</mat-label>
     <input matInput [value]="playerName" (input)="onPlayerNameChange($event)" required />
   </mat-form-field>
 
   <!-- رمز اللعبة -->
   <mat-form-field appearance="outline">
-    <mat-label>{{ 'JOIN.GAME_CODE' | translate }}</mat-label>
+    <mat-label>{{ 'GAME_CODE' | translate }}</mat-label>
     <input matInput [value]="gameCode" (input)="onGameCodeChange($event)" required />
   </mat-form-field>
 
@@ -26,6 +26,6 @@
 
   <!-- زر الانضمام -->
   <button mat-raised-button color="primary" (click)="joinGame()" [disabled]="!canJoin()">
-    {{ 'JOIN.BUTTON' | translate }}
+    {{ 'BUTTON' | translate }}
   </button>
 </div>

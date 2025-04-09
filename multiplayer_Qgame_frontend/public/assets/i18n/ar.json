@@ -1,4 +1,5 @@
-{
+ {
+  "JOIN_GAME":"انضم إلى اللعبة",
   "CREATE_GAME": "إنشاء لعبة",
   "ROOM_NAME": "اسم غرفة اللعبة",
   "WIN_POINTS": "نقاط الفوز",
@@ -11,5 +12,15 @@
   "BUTTON": "انضمام",
   "CHARACTER_HERO": "البطل",
   "CHARACTER_ROBOT": "الروبوت",
-  "CHARACTER_GIRL": "الفتاة"
+  "CHARACTER_GIRL": "الفتاة",
+  "GAME_ROOM": "غرفة اللعبة",
+  "CODE": "رمز الدخول",
+  "COPY_CODE": "نسخ الكود",
+  "JOINED_PLAYERS": "اللاعبون المنضمون",
+  "START_GAME": "ابدأ اللعبة",
+  "GAME_ROOM_NAME": "اسم الغرفة",
+  "SELECT_CATEGORIES": "اختر التصنيفات",
+  "EASY": "سهل",
+  "MEDIUM": "متوسط",
+  "HARD": "صعب"
 }
