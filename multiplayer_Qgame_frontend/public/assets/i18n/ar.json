@@ -5,5 +5,11 @@
   "PLAYER_COUNT": "عدد اللاعبين",
   "CATEGORIES": "اختر الفئات",
   "DIFFICULTY": "الصعوبة",
-  "CREATE": "إنشاء"
+  "CREATE": "إنشاء",
+  "PLAYER_NAME": "اسم اللاعب",
+  "GAME_CODE": "رمز اللعبة",
+  "BUTTON": "انضمام",
+  "CHARACTER_HERO": "البطل",
+  "CHARACTER_ROBOT": "الروبوت",
+  "CHARACTER_GIRL": "الفتاة"
 }

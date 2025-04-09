@@ -1,1 +1,31 @@
-<p>join-game works!</p>
+<div class="container">
+  <!-- اسم اللاعب -->
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'JOIN.PLAYER_NAME' | translate }}</mat-label>
+    <input matInput [value]="playerName" (input)="onPlayerNameChange($event)" required />
+  </mat-form-field>
+
+  <!-- رمز اللعبة -->
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'JOIN.GAME_CODE' | translate }}</mat-label>
+    <input matInput [value]="gameCode" (input)="onGameCodeChange($event)" required />
+  </mat-form-field>
+
+  <!-- اختيار الشخصية -->
+  <div class="character-grid">
+    <div
+      class="character-card"
+      *ngFor="let char of characters"
+      [class.selected]="char.id === selectedCharacterId"
+      (click)="selectCharacter(char.id)"
+    >
+      <img [src]="char.image" alt="character" />
+      <div class="character-name">{{ char.name | translate }}</div>
+    </div>
+  </div>
+
+  <!-- زر الانضمام -->
+  <button mat-raised-button color="primary" (click)="joinGame()" [disabled]="!canJoin()">
+    {{ 'JOIN.BUTTON' | translate }}
+  </button>
+</div>

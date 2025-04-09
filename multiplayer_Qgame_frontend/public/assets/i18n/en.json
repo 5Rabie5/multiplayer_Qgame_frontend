@@ -5,5 +5,11 @@
   "PLAYER_COUNT": "Player Count",
   "CATEGORIES": "Select Categories",
   "DIFFICULTY": "Difficulty",
-  "CREATE": "Create"
+  "CREATE": "Create",
+  "PLAYER_NAME": "Player Name",
+  "GAME_CODE": "Game Code",
+  "BUTTON": "Join",
+  "CHARACTER_HERO": "Hero",
+  "CHARACTER_ROBOT": "Robot",
+  "CHARACTER_GIRL": "Girl"
 }

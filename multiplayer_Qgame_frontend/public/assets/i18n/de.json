@@ -5,5 +5,11 @@
   "PLAYER_COUNT": "Spieleranzahl",
   "CATEGORIES": "Kategorien auswählen",
   "DIFFICULTY": "Schwierigkeitsgrad",
-  "CREATE": "Erstellen"
+  "CREATE": "Erstellen",
+  "PLAYER_NAME": "Spielername",
+  "GAME_CODE": "Spielcode",
+  "BUTTON": "Beitreten",
+  "CHARACTER_HERO": "Held",
+  "CHARACTER_ROBOT": "Roboter",
+  "CHARACTER_GIRL": "Mädchen"
 }
