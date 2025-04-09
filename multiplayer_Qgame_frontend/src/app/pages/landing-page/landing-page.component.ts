@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,13 +32,22 @@ export class LandingPageComponent implements OnInit {
   constructor(public translate: TranslateService) {}
 
   ngOnInit(): void {
+    const savedLang = localStorage.getItem('lang');
     const browserLang = navigator.language.split('-')[0];
     const supportedLangs = this.languages.map(l => l.code);
-    const defaultLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
+    const defaultLang = savedLang || (supportedLangs.includes(browserLang) ? browserLang : 'en');
+
     this.translate.use(defaultLang);
+    localStorage.setItem('lang', defaultLang);
   }
 
   changeLang(lang: string): void {
     this.translate.use(lang);
+    localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+
+    // ضبط الاتجاه (RTL أو LTR)
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }
+
 }
