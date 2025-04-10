@@ -1,31 +1,55 @@
-<div class="container">
-  <!-- اسم اللاعب -->
-  <mat-form-field appearance="outline">
+<div class="join-container">
+
+  <!-- Player Name -->
+  <mat-form-field appearance="fill">
     <mat-label>{{ 'PLAYER_NAME' | translate }}</mat-label>
     <input matInput [value]="playerName" (input)="onPlayerNameChange($event)" required />
   </mat-form-field>
 
-  <!-- رمز اللعبة -->
-  <mat-form-field appearance="outline">
+  <!-- Game Code -->
+  <mat-form-field appearance="fill">
     <mat-label>{{ 'GAME_CODE' | translate }}</mat-label>
     <input matInput [value]="gameCode" (input)="onGameCodeChange($event)" required />
   </mat-form-field>
 
-  <!-- اختيار الشخصية -->
-  <div class="character-grid">
-    <div
-      class="character-card"
-      *ngFor="let char of characters"
-      [class.selected]="char.id === selectedCharacterId"
-      (click)="selectCharacter(char.id)"
-    >
-      <img [src]="char.image" alt="character" />
-      <div class="character-name">{{ char.name | translate }}</div>
-    </div>
+  <!-- Upload Image Option -->
+  <label class="upload-label">{{ 'UPLOAD_AVATAR' | translate }}</label>
+  <input type="file" (change)="onAvatarChange($event)" accept="image/*" />
+
+  <!-- Character Dropdown -->
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'CHARACTER' | translate }}</mat-label>
+    <mat-select [value]="selectedCharacterId" (selectionChange)="selectCharacter($event.value)">
+      <mat-option value="">{{ 'SELECT_CHARACTER' | translate }}</mat-option>
+      <mat-option *ngFor="let character of characters" [value]="character.id">
+        <img [src]="character.image" class="avatar-icon" />
+        {{ character.name | translate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Color Dropdown -->
+  <mat-form-field appearance="fill">
+    <mat-label>{{ 'COLOR' | translate }}</mat-label>
+    <mat-select [value]="selectedColor" (selectionChange)="selectedColor = $event.value">
+      <mat-option value="">{{ 'SELECT_COLOR' | translate }}</mat-option>
+      <mat-option *ngFor="let color of colors" [value]="color">
+        {{ color | titlecase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Image Preview (Uploaded OR Character) -->
+  <div class="preview" *ngIf="avatarImage || selectedCharacterImage">
+    <img
+      [src]="avatarImage || selectedCharacterImage"
+      alt="Preview"
+      [ngStyle]="{
+      'border-color': selectedColor,
+      'border-width.px': 4
+    }"
+    />
   </div>
 
-  <!-- زر الانضمام -->
-  <button mat-raised-button color="primary" (click)="joinGame()" [disabled]="!canJoin()">
-    {{ 'BUTTON' | translate }}
-  </button>
+
 </div>

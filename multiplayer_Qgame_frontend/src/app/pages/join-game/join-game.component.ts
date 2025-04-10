@@ -4,6 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-join-game',
@@ -13,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
     TranslateModule
   ],
   templateUrl: './join-game.component.html',
@@ -22,7 +24,9 @@ export class JoinGameComponent {
   playerName: string = '';
   gameCode: string = '';
   selectedCharacterId: string | null = null;
-
+  avatarImage: string | null = null;
+  selectedColor: string = '';
+  colors = ['red', 'blue', 'green', 'yellow'];
   characters = [
     { id: 'saint_paul',      name: 'CHARACTER.SAINT_PAUL',      image: 'https://robohash.org/saint_paul?set=set2&size=100x100' },
     { id: 'virgin_mary',     name: 'CHARACTER.VIRGIN_MARY',     image: 'https://robohash.org/virgin_mary?set=set2&size=100x100' },
@@ -34,7 +38,6 @@ export class JoinGameComponent {
     { id: 'saint_george',    name: 'CHARACTER.SAINT_GEORGE',    image: 'https://robohash.org/saint_george?set=set2&size=100x100' },
   ];
 
-
   onPlayerNameChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.playerName = input.value;
@@ -45,9 +48,8 @@ export class JoinGameComponent {
     this.gameCode = input.value;
   }
 
-
-  selectCharacter(id: string): void {
-    this.selectedCharacterId = id;
+  selectCharacter(characterId: string): void {
+    this.selectedCharacterId = characterId;
   }
 
   canJoin(): boolean {
@@ -61,4 +63,23 @@ export class JoinGameComponent {
       character: this.selectedCharacterId,
     });
   }
+
+
+  onAvatarChange(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.avatarImage = reader.result as string;
+        this.selectedCharacterId = null; // clear character if user uploads image
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  get selectedCharacterImage(): string | null {
+    const selected = this.characters.find(c => c.id === this.selectedCharacterId);
+    return selected ? selected.image : null;
+  }
+
 }
