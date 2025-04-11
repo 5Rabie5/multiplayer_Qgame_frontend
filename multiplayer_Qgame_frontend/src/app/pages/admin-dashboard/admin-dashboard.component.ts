@@ -18,7 +18,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AdminDashboardComponent {
   gameCode = 'ABC123';
-  players = ['Player 1', 'Player 2', 'Player 3'];
+  players = [
+    { name: 'Sarah', avatar: 'assets/avatars/sarah.jpg', online: true, movement: 0 },
+    { name: 'Aarav', avatar: '', online: true, movement: 1 }, // no avatar, will show 'A'
+    { name: 'Diya', avatar: null, online: false, movement: 0 },
+    { name: 'Paul', avatar: 'assets/avatars/paul.jpg', online: false, movement: -1 },
+  ];
+
+
 
   startGame() {
     console.log('Game started!');

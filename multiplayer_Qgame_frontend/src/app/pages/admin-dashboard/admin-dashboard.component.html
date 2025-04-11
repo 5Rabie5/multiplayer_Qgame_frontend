@@ -9,10 +9,30 @@
 
   <mat-card class="player-list">
     <h3>{{ 'JOINED_PLAYERS' | translate }}</h3>
-    <ul>
-      <li *ngFor="let player of players">
-        {{ player }}
+    <ul class="player-rank-list">
+      <li *ngFor="let player of players; index as i" class="player-item">
+        <div class="rank">{{ i + 1 }}.</div>
+
+        <ng-container *ngIf="player.avatar; else initials">
+          <img [src]="player.avatar" alt="avatar" class="avatar" />
+        </ng-container>
+        <ng-template #initials>
+          <div class="avatar initials">
+            {{ player.name.charAt(0).toUpperCase() }}
+          </div>
+        </ng-template>
+
+        <div class="name">{{ player.name }}</div>
+
+<!--        <div class="movement" [ngClass]="{ up: player.movement > 0, down: player.movement < 0 }">-->
+<!--          <span *ngIf="player.movement > 0">▲</span>-->
+<!--          <span *ngIf="player.movement < 0">▼</span>-->
+<!--        </div>-->
+
+
+        <div class="status-dot" [ngClass]="{ online: player.online, offline: !player.online }"></div>
       </li>
+
     </ul>
   </mat-card>
 

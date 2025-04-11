@@ -16,3 +16,78 @@ mat-card {
 button {
   margin-top: 1rem;
 }
+.player-rank-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
+}
+
+.rank {
+  font-weight: bold;
+  width: 30px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 12px;
+  object-fit: cover;
+}
+
+.avatar.initials {
+  background-color: #3f51b5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+
+.name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.movement {
+  width: 20px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.movement.up {
+  color: #00c853; // أخضر
+}
+
+.movement.down {
+  color: #ff5252; // أحمر
+}
+
+
+.status-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-left: 10px;
+}
+
+.status-dot.online {
+  background-color: limegreen;
+}
+
+.status-dot.offline {
+  background-color: red;
+}
