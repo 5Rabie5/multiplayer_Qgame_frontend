@@ -32,7 +32,6 @@
               }
             ],
             "styles": [
-              "src/styles/azure-theme.scss",
               "src/styles.scss"
             ],
             "scripts": []
