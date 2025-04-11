@@ -32,7 +32,7 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles/azure-theme.scss",
               "src/styles.scss"
             ],
             "scripts": []

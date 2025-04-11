@@ -28,5 +28,20 @@
    "TIMED_QUESTION": "الأسئلة مع وقت",
    "WAIT_ALL_PLAYERS": "انتظر الجميع",
    "NEXT_AFTER_SECONDS": "انتقل بعد عدد ثوانٍ",
-   "SECONDS_PER_QUESTION": "ثواني لكل سؤال"
-}
+   "SECONDS_PER_QUESTION": "ثواني لكل سؤال",
+   "QUESTION_TYPE": "نوع السؤال",
+   "MULTIPLE_ANSWER": "اختيار من متعدد",
+   "TRUE_FALSE": "صح / خطأ",
+   "ICONS": "رموز",
+   "MIX": "مزيج",
+   "CHARACTER": "الشخصية",
+   "COLOR": "اللون",
+   "SELECT_COLOR": "اختر اللون",
+   "Red": "أحمر",
+   "Blue": "أزرق",
+   "Green": "أخضر",
+   "Yellow": "أصفر",
+   "UPLOAD_AVATAR": "رفع الصورة الرمزية",
+   "CHOOSE_FILE": "اختر ملفًا",
+   "NO_FILE_SELECTED": "لا يوجد ملف محدد"
+ }

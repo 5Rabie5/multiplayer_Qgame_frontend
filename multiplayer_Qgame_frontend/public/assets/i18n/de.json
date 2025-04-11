@@ -28,5 +28,20 @@
   "TIMED_QUESTION": "Fragen mit Zeit",
   "WAIT_ALL_PLAYERS": "Warte auf alle Spieler",
   "NEXT_AFTER_SECONDS": "Automatisch weiter nach Sekunden",
-  "SECONDS_PER_QUESTION": "Sekunden pro Frage"
+  "SECONDS_PER_QUESTION": "Sekunden pro Frage",
+  "QUESTION_TYPE": "Fragetyp",
+  "MULTIPLE_ANSWER": "Mehrfachauswahl",
+  "TRUE_FALSE": "Wahr / Falsch",
+  "ICONS": "Symbole",
+  "MIX": "Mischung",
+  "CHARACTER": "Charakter",
+  "COLOR": "Farbe",
+  "SELECT_COLOR": "Farbe auswählen",
+  "Red": "Rot",
+  "Blue": "Blau",
+  "Green": "Grün",
+  "Yellow": "Gelb",
+  "UPLOAD_AVATAR": "Avatar hochladen",
+  "CHOOSE_FILE": "Datei auswählen",
+  "NO_FILE_SELECTED": "KEINE_DATEI_AUSGEWÄHLT"
 }

@@ -26,7 +26,8 @@ export class JoinGameComponent {
   selectedCharacterId: string | null = null;
   avatarImage: string | null = null;
   selectedColor: string = '';
-  colors = ['red', 'blue', 'green', 'yellow'];
+  colors = ['Red', 'Blue', 'Green', 'Yellow'];
+  avatarFileName: string | null = null;
   characters = [
     { id: 'saint_paul',      name: 'CHARACTER.SAINT_PAUL',      image: 'https://robohash.org/saint_paul?set=set2&size=100x100' },
     { id: 'virgin_mary',     name: 'CHARACTER.VIRGIN_MARY',     image: 'https://robohash.org/virgin_mary?set=set2&size=100x100' },
@@ -65,13 +66,17 @@ export class JoinGameComponent {
   }
 
 
+
+
   onAvatarChange(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.avatarFileName = file.name;
+
       const reader = new FileReader();
       reader.onload = () => {
         this.avatarImage = reader.result as string;
-        this.selectedCharacterId = null; // clear character if user uploads image
       };
       reader.readAsDataURL(file);
     }

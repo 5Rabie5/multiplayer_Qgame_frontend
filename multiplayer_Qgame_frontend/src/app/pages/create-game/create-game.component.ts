@@ -33,6 +33,8 @@ import { MatOptionModule } from '@angular/material/core'; // ✅ هذا هو ا�
   ]
 })
 export class CreateGameComponent {
+  value = 'one';
+
   roomName: string = '';
   selectedWinPoints: number | string = 100;
   selectedPlayerCount: number | string = 2;
@@ -42,6 +44,7 @@ export class CreateGameComponent {
   pointsOptions = [100, 200, 500, 1000, 'Unlimited'];
   playerCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Unlimited'];
   categories: string[] = [];
+  selectedQuestionType: string = 'multiple'; // default
 
   difficulties = [
     { label: 'EASY', value: 'easy' },
@@ -76,7 +79,9 @@ export class CreateGameComponent {
       points: this.selectedWinPoints,
       players: this.selectedPlayerCount,
       categories: this.selectedCategories,
-      difficulty: this.selectedDifficulty
+      difficulty: this.selectedDifficulty,
+      questionType: this.selectedQuestionType, // ✅ أضف هذا
+      gameMode: this.gameMode
     });
 
     const gameCode = 'ABC123';
@@ -84,6 +89,7 @@ export class CreateGameComponent {
       queryParams: { code: gameCode }
     });
   }
+
   onTimedOptionChange(option: string) {
     this.timedOption = option;
   }

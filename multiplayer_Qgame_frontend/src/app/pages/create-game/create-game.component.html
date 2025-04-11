@@ -1,3 +1,11 @@
+
+<mat-form-field appearance="fill">
+  <mat-label>Choose</mat-label>
+  <mat-select [(value)]="value">
+    <mat-option value="one">One</mat-option>
+    <mat-option value="two">Two</mat-option>
+  </mat-select>
+</mat-form-field>
 <div class="landing-container">
   <div class="card">
     <h2>{{ 'CREATE_GAME' | translate }}</h2>
@@ -83,7 +91,19 @@
           <input matInput type="number" [value]="secondsPerQuestion" (input)="secondsPerQuestion = $any($event.target).value" />
         </mat-form-field>
       </div>
-
+      <!-- Question Type -->
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'QUESTION_TYPE' | translate }}</mat-label>
+        <mat-select
+          [value]="selectedQuestionType"
+          (selectionChange)="selectedQuestionType = $event.value"
+        >
+          <mat-option value="multiple">{{ 'MULTIPLE_ANSWER' | translate }}</mat-option>
+          <mat-option value="truefalse">{{ 'TRUE_FALSE' | translate }}</mat-option>
+          <mat-option value="icons">{{ 'ICONS' | translate }}</mat-option>
+          <mat-option value="mix">{{ 'MIX' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
       <!-- Difficulty -->
       <label class="section-label">{{ 'DIFFICULTY' | translate }}</label>
       <mat-radio-group
@@ -110,4 +130,5 @@
       </div>
     </form>
   </div>
+
 </div>

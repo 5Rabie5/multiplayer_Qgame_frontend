@@ -12,9 +12,17 @@
     <input matInput [value]="gameCode" (input)="onGameCodeChange($event)" required />
   </mat-form-field>
 
-  <!-- Upload Image Option -->
-  <label class="upload-label">{{ 'UPLOAD_AVATAR' | translate }}</label>
-  <input type="file" (change)="onAvatarChange($event)" accept="image/*" />
+  <!-- Upload Avatar -->
+  <div class="upload-avatar-section">
+    <label>{{ 'UPLOAD_AVATAR' | translate }}</label>
+    <div class="upload-wrapper">
+      <button mat-raised-button color="primary" (click)="fileInput.click()">
+        {{ 'CHOOSE_FILE' | translate }}
+      </button>
+      <span class="file-name">{{ avatarFileName || ('NO_FILE_SELECTED' | translate) }}</span>
+      <input #fileInput type="file" accept="image/*" hidden (change)="onAvatarChange($event)" />
+    </div>
+  </div>
 
   <!-- Character Dropdown -->
   <mat-form-field appearance="fill">
@@ -28,28 +36,28 @@
     </mat-select>
   </mat-form-field>
 
-  <!-- Color Dropdown -->
   <mat-form-field appearance="fill">
     <mat-label>{{ 'COLOR' | translate }}</mat-label>
     <mat-select [value]="selectedColor" (selectionChange)="selectedColor = $event.value">
       <mat-option value="">{{ 'SELECT_COLOR' | translate }}</mat-option>
       <mat-option *ngFor="let color of colors" [value]="color">
-        {{ color | titlecase }}
+        {{ color | translate }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <!-- Image Preview (Uploaded OR Character) -->
+
+
+  <!-- Image Preview -->
   <div class="preview" *ngIf="avatarImage || selectedCharacterImage">
     <img
       [src]="avatarImage || selectedCharacterImage"
       alt="Preview"
       [ngStyle]="{
-      'border-color': selectedColor,
-      'border-width.px': 4
-    }"
+        'border-color': selectedColor,
+        'border-width.px': 4
+      }"
     />
   </div>
-
 
 </div>
