@@ -1,24 +1,24 @@
-<div class="landing-container">
-  <div class="card">
-    <h1>{{ 'WELCOME' | translate }}</h1>
-    <p>{{ 'SELECT_OPTION' | translate }}</p>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-yellow-50 via-orange-50 to-green-100 px-4 py-6 text-green-900 font-sans">
+  <div class="bg-white/60 shadow-lg rounded-3xl p-8 w-full max-w-md text-center">
+    <h1 class="text-2xl font-bold mb-2">{{ 'WELCOME' | translate }}</h1>
+    <p class="mb-6">{{ 'SELECT_OPTION' | translate }}</p>
 
-    <div class="button-group">
-      <button mat-raised-button color="primary" [routerLink]="'/create'">
+    <div class="flex justify-around mb-6">
+      <button class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-4 rounded-xl shadow">
         {{ 'CREATE_GAME' | translate }}
       </button>
-      <button mat-raised-button color="accent" [routerLink]="'/join'">
+      <button class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-4 rounded-xl shadow">
         {{ 'JOIN_GAME' | translate }}
       </button>
     </div>
 
-    <mat-form-field appearance="outline" class="custom-lang-select">
-    <mat-label>{{ 'LANGUAGE' | translate }}</mat-label>
-      <mat-select [value]="translate.currentLang" (selectionChange)="changeLang($event.value)">
-        <mat-option *ngFor="let lang of languages" [value]="lang.code">
+    <div class="text-left">
+      <label class="block text-sm font-semibold mb-1">{{ 'LANGUAGE' | translate }}</label>
+      <select class="w-full border border-green-800 rounded-xl px-3 py-2 text-green-900" [(ngModel)]="selectedLang" (ngModelChange)="changeLang($event)">
+        <option *ngFor="let lang of languages" [value]="lang.code">
           {{ lang.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        </option>
+      </select>
+    </div>
   </div>
 </div>
