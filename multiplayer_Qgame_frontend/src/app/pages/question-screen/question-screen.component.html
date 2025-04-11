@@ -1,0 +1,47 @@
+<div class="min-h-screen bg-gradient-to-b from-yellow-50 via-orange-50 to-green-100 px-4 py-6 text-green-900 font-sans">
+
+  <!-- Countdown Circle Centered on Top -->
+  <div class="flex justify-center mb-6">
+    <div class="relative w-24 h-24">
+      <svg class="absolute top-0 left-0 w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+        <path class="text-orange-200" stroke="currentColor" stroke-width="3" fill="none" d="M18 2.0845
+            a 15.9155 15.9155 0 1 1 0 31.831
+            a 15.9155 15.9155 0 1 1 0 -31.831" />
+        <path class="text-orange-500 transition-all duration-300" stroke="currentColor" stroke-width="3" fill="none"
+              [attr.stroke-dasharray]="dashArray"
+              d="M18 2.0845
+            a 15.9155 15.9155 0 1 1 0 31.831
+            a 15.9155 15.9155 0 1 1 0 -31.831" />
+      </svg>
+      <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xl font-bold">
+        {{ timer }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Player Info: Avatar + Points + Rank -->
+  <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-4">
+      <img src="assets/avatar.png" alt="Player" class="w-16 h-16 rounded-full border-2 border-green-800 shadow" />
+      <div class="text-lg font-bold text-green-900">
+        {{ score }} pts
+      </div>
+    </div>
+    <div class="bg-yellow-300 text-green-900 rounded-full px-3 py-1 font-bold">
+      #{{ rank }}
+    </div>
+  </div>
+
+  <!-- Question Box -->
+  <div class="bg-yellow-100 rounded-3xl p-6 shadow text-center text-2xl font-bold mb-8">
+    {{ question }}
+  </div>
+
+  <!-- Answer Options -->
+  <div class="flex flex-col gap-6">
+    <button *ngFor="let option of options"
+            class="bg-yellow-50 hover:bg-yellow-100 text-green-900 py-4 px-6 rounded-3xl text-xl font-semibold text-left shadow">
+      {{ option }}
+    </button>
+  </div>
+</div>
