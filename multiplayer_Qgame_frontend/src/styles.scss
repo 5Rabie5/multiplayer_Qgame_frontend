@@ -5,3 +5,47 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.custom-select-panel {
+  background-color: #ffffff !important;
+  color: #1f3c2f !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+  padding: 0.5rem 0;
+  backdrop-filter: none !important;
+}
+/* Force solid dropdown background globally */
+.cdk-overlay-container .mat-select-panel {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: none !important;
+}
+
+/* Optional: image and layout inside mat-option */
+.mat-option {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+}
+
+.mat-option img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+/* Applies to ALL Angular Material dropdowns globally */
+.cdk-overlay-container .mat-select-panel {
+  background-color: #fff !important;
+  color: #1f2937 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: none !important;
+}
+::ng-deep .custom-select-panel {
+  background-color: white !important;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  color: #1a202c; // or your primary text color
+}

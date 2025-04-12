@@ -1,63 +1,82 @@
-<div class="join-container">
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-yellow-50 via-orange-50 to-green-100 px-4 py-6 text-green-900 font-sans">
+  <div class="bg-white/60 shadow-lg rounded-3xl p-8 w-full max-w-md text-center join-container">
 
-  <!-- Player Name -->
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'PLAYER_NAME' | translate }}</mat-label>
-    <input matInput [value]="playerName" (input)="onPlayerNameChange($event)" required />
-  </mat-form-field>
+    <!-- PLAYER NAME -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ 'PLAYER_NAME' | translate }}</mat-label>
+      <input matInput [value]="playerName" (input)="onPlayerNameChange($event)" required />
+    </mat-form-field>
 
-  <!-- Game Code -->
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'GAME_CODE' | translate }}</mat-label>
-    <input matInput [value]="gameCode" (input)="onGameCodeChange($event)" required />
-  </mat-form-field>
+    <!-- GAME CODE -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ 'GAME_CODE' | translate }}</mat-label>
+      <input matInput [value]="gameCode" (input)="onGameCodeChange($event)" required />
+    </mat-form-field>
 
-  <!-- Upload Avatar -->
-  <div class="upload-avatar-section">
-    <label>{{ 'UPLOAD_AVATAR' | translate }}</label>
-    <div class="upload-wrapper">
-      <button mat-raised-button color="primary" (click)="fileInput.click()">
-        {{ 'CHOOSE_FILE' | translate }}
-      </button>
-      <span class="file-name">{{ avatarFileName || ('NO_FILE_SELECTED' | translate) }}</span>
-      <input #fileInput type="file" accept="image/*" hidden (change)="onAvatarChange($event)" />
+    <!-- AVATAR UPLOAD -->
+    <div class="upload-avatar-section text-left">
+      <label class="block text-sm font-semibold mb-1">{{ 'UPLOAD_AVATAR' | translate }}</label>
+      <div class="upload-wrapper flex gap-2 items-center">
+        <button mat-raised-button color="primary" (click)="fileInput.click()">
+          {{ 'CHOOSE_FILE' | translate }}
+        </button>
+        <span class="file-name text-sm italic text-gray-500">{{ avatarFileName || ('NO_FILE_SELECTED' | translate) }}</span>
+        <input #fileInput type="file" accept="image/*" hidden (change)="onAvatarChange($event)" />
+      </div>
     </div>
+
+    <!-- CHARACTER SELECT -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ 'CHARACTER' | translate }}</mat-label>
+      <mat-select
+        [value]="selectedCharacterId"
+        (selectionChange)="selectCharacter($event.value)"
+        panelClass="custom-select-panel"
+      >
+        <mat-option value="">{{ 'SELECT_CHARACTER' | translate }}</mat-option>
+        <mat-option *ngFor="let character of characters" [value]="character.id">
+          <img [src]="character.image" class="avatar-icon" />
+          {{ character.name | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- COLOR SELECT -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ 'COLOR' | translate }}</mat-label>
+      <mat-select
+        [value]="selectedColor"
+        (selectionChange)="selectedColor = $event.value"
+        panelClass="custom-select-panel"
+      >
+        <mat-option value="">{{ 'SELECT_COLOR' | translate }}</mat-option>
+        <mat-option *ngFor="let color of colors" [value]="color">
+          {{ color | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- IMAGE PREVIEW -->
+    <div class="preview mt-4" *ngIf="avatarImage || selectedCharacterImage">
+      <img
+        [src]="avatarImage || selectedCharacterImage"
+        alt="Preview"
+        [ngStyle]="{
+          'border-color': selectedColor,
+          'border-width.px': 4
+        }"
+      />
+    </div>
+
+    <!-- JOIN GAME BUTTON -->
+    <button
+      mat-raised-button
+      color="accent"
+      class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-6 mt-6 rounded-xl shadow w-full"
+      [disabled]="!canJoin()"
+      (click)="joinGame()"
+    >
+      {{ 'JOIN_GAME' | translate }}
+    </button>
   </div>
-
-  <!-- Character Dropdown -->
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'CHARACTER' | translate }}</mat-label>
-    <mat-select [value]="selectedCharacterId" (selectionChange)="selectCharacter($event.value)">
-      <mat-option value="">{{ 'SELECT_CHARACTER' | translate }}</mat-option>
-      <mat-option *ngFor="let character of characters" [value]="character.id">
-        <img [src]="character.image" class="avatar-icon" />
-        {{ character.name | translate }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>{{ 'COLOR' | translate }}</mat-label>
-    <mat-select [value]="selectedColor" (selectionChange)="selectedColor = $event.value">
-      <mat-option value="">{{ 'SELECT_COLOR' | translate }}</mat-option>
-      <mat-option *ngFor="let color of colors" [value]="color">
-        {{ color | translate }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-
-
-  <!-- Image Preview -->
-  <div class="preview" *ngIf="avatarImage || selectedCharacterImage">
-    <img
-      [src]="avatarImage || selectedCharacterImage"
-      alt="Preview"
-      [ngStyle]="{
-        'border-color': selectedColor,
-        'border-width.px': 4
-      }"
-    />
-  </div>
-
 </div>

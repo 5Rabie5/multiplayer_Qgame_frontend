@@ -4,13 +4,22 @@
     <p class="mb-6">{{ 'SELECT_OPTION' | translate }}</p>
 
     <div class="flex justify-around mb-6">
-      <button class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-4 rounded-xl shadow">
+      <button
+        class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-4 rounded-xl shadow"
+        routerLink="/create"
+      >
         {{ 'CREATE_GAME' | translate }}
       </button>
-      <button class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-4 rounded-xl shadow">
+
+      <button
+        class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-4 rounded-xl shadow"
+        routerLink="/join"
+      >
         {{ 'JOIN_GAME' | translate }}
       </button>
     </div>
+
+
 
     <div class="text-left">
       <label class="block text-sm font-semibold mb-1">{{ 'LANGUAGE' | translate }}</label>
