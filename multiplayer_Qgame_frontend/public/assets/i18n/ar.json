@@ -46,5 +46,6 @@
    "NO_FILE_SELECTED": "لا يوجد ملف محدد",
    "TIMER_MODE": "وضع المؤقت",
    "SELECT_CATEGORY": "اختر الفئة",
-   "Unlimited": "غير محدود"
+   "Unlimited": "غير محدود",
+   "SCAN_TO_JOIN": "امسح للانضمام إلى اللعبة"
  }

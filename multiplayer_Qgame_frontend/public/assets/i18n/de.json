@@ -46,5 +46,6 @@
   "NO_FILE_SELECTED": "KEINE_DATEI_AUSGEWÄHLT",
   "TIMER_MODE": "Zeitmodus",
   "SELECT_CATEGORY": "Kategorie auswählen",
-  "Unlimited": "Unbegrenzt"
+  "Unlimited": "Unbegrenzt",
+  "SCAN_TO_JOIN": "Scannen, um dem Spiel beizutreten"
 }

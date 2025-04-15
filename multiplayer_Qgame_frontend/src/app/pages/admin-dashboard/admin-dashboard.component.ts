@@ -4,6 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
+import { QRCodeComponent} from 'angularx-qrcode';
+
+
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
@@ -11,7 +14,8 @@ import { ActivatedRoute } from '@angular/router';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    TranslateModule
+    TranslateModule,
+    QRCodeComponent
   ],
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss']

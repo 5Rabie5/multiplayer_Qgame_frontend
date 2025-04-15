@@ -46,5 +46,7 @@
   "NO_FILE_SELECTED": "NO_FILE_SELECTED",
   "TIMER_MODE": "Timer Mode",
   "SELECT_CATEGORY": "Select category",
-  "Unlimited": "Unlimited"
+  "Unlimited": "Unlimited",
+  "SCAN_TO_JOIN": "Scan to join the game"
+
 }
