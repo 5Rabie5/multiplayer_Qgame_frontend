@@ -1,28 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/* GLOBAL ROOT STYLES */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  color: white;
+  background-color: #1f2937; // fallback for background
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.custom-select-panel {
-  background-color: #ffffff !important;
-  color: #1f3c2f !important;
-  border-radius: 1rem !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
-  padding: 0.5rem 0;
-  backdrop-filter: none !important;
-}
-/* Force solid dropdown background globally */
+
+/* CUSTOM DROPDOWN STYLES */
 .cdk-overlay-container .mat-select-panel {
   background-color: #ffffff !important;
   color: #1f2937 !important;
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 12px !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   backdrop-filter: none !important;
 }
 
-/* Optional: image and layout inside mat-option */
+/* Optional: Consistent dropdown with avatars/icons */
 .mat-option {
   display: flex !important;
   align-items: center;
@@ -35,17 +34,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 28px;
   border-radius: 50%;
 }
-/* Applies to ALL Angular Material dropdowns globally */
-.cdk-overlay-container .mat-select-panel {
-  background-color: #fff !important;
-  color: #1f2937 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: none !important;
-}
+
+/* Use this class for custom dropdowns with glassmorphism */
 ::ng-deep .custom-select-panel {
   background-color: white !important;
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  color: #1a202c; // or your primary text color
+  color: #1a202c !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  padding: 0.5rem 0;
+  backdrop-filter: none !important;
 }

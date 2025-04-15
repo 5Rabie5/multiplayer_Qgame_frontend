@@ -1,134 +1,153 @@
+<div class="min-h-screen bg-gradient-to-b from-yellow-50 via-orange-50 to-green-100 px-4 py-6 text-green-900 font-sans">
+  <div class="max-w-xl mx-auto bg-white rounded-3xl shadow p-6">
+    <h2 class="text-2xl font-bold text-center mb-6">{{ 'CREATE_GAME' | translate }}</h2>
 
-<mat-form-field appearance="fill">
-  <mat-label>Choose</mat-label>
-  <mat-select [(value)]="value">
-    <mat-option value="one">One</mat-option>
-    <mat-option value="two">Two</mat-option>
-  </mat-select>
-</mat-form-field>
-<div class="landing-container">
-  <div class="card">
-    <h2>{{ 'CREATE_GAME' | translate }}</h2>
-
-    <form class="form-group">
+    <form class="space-y-4">
       <!-- Room Name -->
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'ROOM_NAME' | translate }}</mat-label>
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'ROOM_NAME' | translate }}</label>
         <input
-          matInput
+          type="text"
+          name="roomName"
+          [(ngModel)]="roomName"
           placeholder="Quiz Night"
-          [value]="roomName"
-          #roomInput
-          (input)="roomName = roomInput.value"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 text-green-900 bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
         />
-
-      </mat-form-field>
+      </div>
 
       <!-- Win Points -->
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'WIN_POINTS' | translate }}</mat-label>
-        <mat-select
-          [value]="selectedWinPoints"
-          (selectionChange)="selectedWinPoints = $event.value"
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'WIN_POINTS' | translate }}</label>
+        <select
+          [(ngModel)]="selectedWinPoints"
+          name="winPoints"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 text-green-900 bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
         >
-          <mat-option *ngFor="let points of pointsOptions" [value]="points">
-            {{ points }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <option *ngFor="let points of pointsOptions" [value]="points">{{ points }}</option>
+        </select>
+      </div>
 
       <!-- Player Count -->
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'PLAYER_COUNT' | translate }}</mat-label>
-        <mat-select
-          [value]="selectedPlayerCount"
-          (selectionChange)="selectedPlayerCount = $event.value"
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'PLAYER_COUNT' | translate }}</label>
+        <select
+          [(ngModel)]="selectedPlayerCount"
+          name="playerCount"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 text-green-900 bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
         >
-          <mat-option *ngFor="let count of playerCounts" [value]="count">
-            {{ count }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <option *ngFor="let count of playerCounts" [value]="count">{{ count }}</option>
+        </select>
+      </div>
 
       <!-- Categories -->
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'CATEGORIES' | translate }}</mat-label>
-        <mat-select
-          multiple
-          [value]="selectedCategories"
-          (selectionChange)="selectedCategories = $event.value"
-        >
-          <mat-option *ngFor="let cat of categories" [value]="cat">
+      <!-- Categories -->
+      <div class="relative">
+        <label class="block text-sm font-semibold mb-1">{{ 'CATEGORIES' | translate }}</label>
+        <div (click)="toggleCategoryDropdown()" class="cursor-pointer w-full rounded-xl border border-green-200 px-4 py-3 bg-yellow-50 shadow-sm flex justify-between items-center">
+    <span>
+      {{ selectedCategories.length ? selectedCategories.join(', ') : ('SELECT_CATEGORY' | translate) }}
+    </span>
+          <svg [class.rotate-180]="isCategoryDropdownOpen" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+
+        <div *ngIf="isCategoryDropdownOpen" class="absolute z-10 mt-2 w-full bg-white rounded-xl shadow p-3 space-y-2">
+          <label *ngFor="let cat of categories" class="flex items-center gap-2">
+            <input
+              type="checkbox"
+              [value]="cat"
+              [checked]="selectedCategories.includes(cat)"
+              (change)="toggleCategory(cat)"
+            />
             {{ cat }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          </label>
+        </div>
+      </div>
 
 
       <!-- Game Mode -->
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'GAME_MODE' | translate }}</mat-label>
-        <mat-select [value]="gameMode" (selectionChange)="gameMode = $event.value">
-          <mat-option value="FASTEST_ANSWER">{{ 'FASTEST_ANSWER' | translate }}</mat-option>
-          <mat-option value="TIMED_QUESTION">{{ 'TIMED_QUESTION' | translate }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- Timer Mode (only when gameMode is TIMED_QUESTION) -->
-      <div *ngIf="gameMode === 'TIMED_QUESTION'">
-        <mat-radio-group [value]="timedOption" (change)="onTimedOptionChange($event.value)">
-          <mat-radio-button value="WAIT_ALL_PLAYERS">
-            {{ 'WAIT_ALL_PLAYERS' | translate }}
-          </mat-radio-button>
-          <mat-radio-button value="NEXT_AFTER_SECONDS">
-            {{ 'NEXT_AFTER_SECONDS' | translate }}
-          </mat-radio-button>
-        </mat-radio-group>
-
-        <!-- Seconds Input -->
-        <mat-form-field *ngIf="timedOption === 'NEXT_AFTER_SECONDS'" appearance="outline">
-          <mat-label>{{ 'SECONDS_PER_QUESTION' | translate }}</mat-label>
-          <input matInput type="number" [value]="secondsPerQuestion" (input)="secondsPerQuestion = $any($event.target).value" />
-        </mat-form-field>
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'GAME_MODE' | translate }}</label>
+        <select
+          [(ngModel)]="gameMode"
+          name="gameMode"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 text-green-900 bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
+        >
+          <option value="FASTEST_ANSWER">{{ 'FASTEST_ANSWER' | translate }}</option>
+          <option value="TIMED_QUESTION">{{ 'TIMED_QUESTION' | translate }}</option>
+        </select>
       </div>
+
+      <!-- Timed Question Mode Options -->
+      <div *ngIf="gameMode === 'TIMED_QUESTION'">
+        <label class="block text-sm font-semibold mb-1">{{ 'TIMER_MODE' | translate }}</label>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2">
+            <input type="radio" value="WAIT_ALL_PLAYERS" [(ngModel)]="timedOption" name="timedOption" />
+            {{ 'WAIT_ALL_PLAYERS' | translate }}
+          </label>
+          <label class="flex items-center gap-2">
+            <input type="radio" value="NEXT_AFTER_SECONDS" [(ngModel)]="timedOption" name="timedOption" />
+            {{ 'NEXT_AFTER_SECONDS' | translate }}
+          </label>
+        </div>
+
+        <div *ngIf="timedOption === 'NEXT_AFTER_SECONDS'" class="mt-2">
+          <label class="block text-sm font-semibold mb-1">{{ 'SECONDS_PER_QUESTION' | translate }}</label>
+          <input
+            type="number"
+            name="secondsPerQuestion"
+            [(ngModel)]="secondsPerQuestion"
+            class="w-full rounded-xl border border-green-200 px-4 py-3 text-green-900 bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
+          />
+        </div>
+      </div>
+
       <!-- Question Type -->
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'QUESTION_TYPE' | translate }}</mat-label>
-        <mat-select
-          [value]="selectedQuestionType"
-          (selectionChange)="selectedQuestionType = $event.value"
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'QUESTION_TYPE' | translate }}</label>
+        <select
+          [(ngModel)]="selectedQuestionType"
+          name="questionType"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 text-green-900 bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
         >
-          <mat-option value="multiple">{{ 'MULTIPLE_ANSWER' | translate }}</mat-option>
-          <mat-option value="truefalse">{{ 'TRUE_FALSE' | translate }}</mat-option>
-          <mat-option value="icons">{{ 'ICONS' | translate }}</mat-option>
-          <mat-option value="mix">{{ 'MIX' | translate }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <option value="multiple">{{ 'MULTIPLE_ANSWER' | translate }}</option>
+          <option value="truefalse">{{ 'TRUE_FALSE' | translate }}</option>
+          <option value="icons">{{ 'ICONS' | translate }}</option>
+          <option value="mix">{{ 'MIX' | translate }}</option>
+        </select>
+      </div>
+
       <!-- Difficulty -->
-      <label class="section-label">{{ 'DIFFICULTY' | translate }}</label>
-      <mat-radio-group
-        [value]="selectedDifficulty"
-        (change)="selectedDifficulty = $event.value"
-      >
-        <mat-radio-button
-          *ngFor="let level of difficulties"
-          [value]="level.value"
-        >
-          {{ level.label | translate }}
-        </mat-radio-button>
-      </mat-radio-group>
-      <!-- Submit Button -->
-      <div class="form-actions">
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'DIFFICULTY' | translate }}</label>
+        <div class="flex justify-around mt-2">
+          <label class="flex items-center gap-2">
+            <input type="radio" value="easy" [(ngModel)]="selectedDifficulty" name="difficulty" />
+            {{ 'EASY' | translate }}
+          </label>
+          <label class="flex items-center gap-2">
+            <input type="radio" value="medium" [(ngModel)]="selectedDifficulty" name="difficulty" />
+            {{ 'MEDIUM' | translate }}
+          </label>
+          <label class="flex items-center gap-2">
+            <input type="radio" value="hard" [(ngModel)]="selectedDifficulty" name="difficulty" />
+            {{ 'HARD' | translate }}
+          </label>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center pt-4">
         <button
-          mat-raised-button
-          color="primary"
-          class="submit-button"
+          type="button"
           (click)="createGame()"
+          class="bg-yellow-300 hover:bg-yellow-400 text-green-900 px-6 py-3 rounded-2xl text-lg font-bold shadow transition-all"
         >
           {{ 'CREATE' | translate }}
         </button>
       </div>
     </form>
   </div>
-
 </div>

@@ -43,5 +43,8 @@
    "Yellow": "أصفر",
    "UPLOAD_AVATAR": "رفع الصورة الرمزية",
    "CHOOSE_FILE": "اختر ملفًا",
-   "NO_FILE_SELECTED": "لا يوجد ملف محدد"
+   "NO_FILE_SELECTED": "لا يوجد ملف محدد",
+   "TIMER_MODE": "وضع المؤقت",
+   "SELECT_CATEGORY": "اختر الفئة",
+   "Unlimited": "غير محدود"
  }

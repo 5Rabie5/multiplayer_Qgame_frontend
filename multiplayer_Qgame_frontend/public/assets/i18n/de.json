@@ -43,5 +43,8 @@
   "Yellow": "Gelb",
   "UPLOAD_AVATAR": "Avatar hochladen",
   "CHOOSE_FILE": "Datei auswählen",
-  "NO_FILE_SELECTED": "KEINE_DATEI_AUSGEWÄHLT"
+  "NO_FILE_SELECTED": "KEINE_DATEI_AUSGEWÄHLT",
+  "TIMER_MODE": "Zeitmodus",
+  "SELECT_CATEGORY": "Kategorie auswählen",
+  "Unlimited": "Unbegrenzt"
 }

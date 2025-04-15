@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,15 +10,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
-import { MatOptionModule } from '@angular/material/core'; // ✅ هذا هو الناقص
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-create-game',
   standalone: true,
   templateUrl: './create-game.component.html',
   styleUrls: ['./create-game.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatOptionModule,
     CommonModule,
     RouterModule,
     FormsModule,
@@ -29,35 +29,30 @@ import { MatOptionModule } from '@angular/material/core'; // ✅ هذا هو ا�
     MatCheckboxModule,
     MatRadioModule,
     MatButtonModule,
+    MatOptionModule,
     TranslatePipe
   ]
 })
-export class CreateGameComponent {
-  value = 'one';
-
+export class CreateGameComponent implements OnInit {
   roomName: string = '';
   selectedWinPoints: number | string = 100;
   selectedPlayerCount: number | string = 2;
   selectedCategories: string[] = [];
   selectedDifficulty: string = 'easy';
+  selectedQuestionType: string = 'multiple';
 
-  pointsOptions = [100, 200, 500, 1000, 'Unlimited'];
-  playerCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Unlimited'];
-  categories: string[] = [];
-  selectedQuestionType: string = 'multiple'; // default
-
-  difficulties = [
-    { label: 'EASY', value: 'easy' },
-    { label: 'MEDIUM', value: 'medium' },
-    { label: 'HARD', value: 'hard' }
-  ];
   gameMode: string = 'FASTEST_ANSWER';
   timedOption: string = 'WAIT_ALL_PLAYERS';
   secondsPerQuestion: number = 10;
 
+  pointsOptions = [100, 200, 500, 1000, 'Unlimited'];
+  playerCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Unlimited'];
+  categories: string[] = [];
+  isCategoryDropdownOpen: boolean = false;
+  constructor(public translate: TranslateService, private router: Router) {}
 
-  constructor(public translate: TranslateService, private router: Router) {
-    this.loadCategories(translate.currentLang);
+  ngOnInit(): void {
+    this.loadCategories(this.translate.currentLang);
     this.translate.onLangChange.subscribe(lang => {
       this.loadCategories(lang.lang);
     });
@@ -69,8 +64,16 @@ export class CreateGameComponent {
       ar: ['عام', 'علوم', 'رياضة', 'تاريخ', 'فنون', 'أدب'],
       de: ['Allgemein', 'Wissenschaft', 'Sport', 'Geschichte']
     };
-
     this.categories = categoryMap[lang] || categoryMap['en'];
+  }
+
+  toggleCategory(category: string) {
+    const index = this.selectedCategories.indexOf(category);
+    if (index === -1) {
+      this.selectedCategories.push(category);
+    } else {
+      this.selectedCategories.splice(index, 1);
+    }
   }
 
   createGame() {
@@ -80,17 +83,25 @@ export class CreateGameComponent {
       players: this.selectedPlayerCount,
       categories: this.selectedCategories,
       difficulty: this.selectedDifficulty,
-      questionType: this.selectedQuestionType, // ✅ أضف هذا
-      gameMode: this.gameMode
+      questionType: this.selectedQuestionType,
+      gameMode: this.gameMode,
+      timedOption: this.timedOption,
+      secondsPerQuestion: this.secondsPerQuestion
     });
 
-    const gameCode = 'ABC123';
+    const gameCode = 'ABC123'; // Ideally generated from backend
     this.router.navigate(['/admin-dashboard'], {
       queryParams: { code: gameCode }
     });
   }
 
-  onTimedOptionChange(option: string) {
-    this.timedOption = option;
+
+  toggleCategoryDropdown() {
+    this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
   }
+
+  closeCategoryDropdown() {
+    this.isCategoryDropdownOpen = false;
+  }
+
 }
