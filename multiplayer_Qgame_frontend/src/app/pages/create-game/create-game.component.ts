@@ -11,6 +11,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
+import { environment } from '../../../environments/environment';
+import { CreateGameService } from '../../service/create-game.service';
+import { GameSessionCreateRequest } from '../../models/game-session-create-request.model';
 
 @Component({
   selector: 'app-create-game',
@@ -49,7 +52,14 @@ export class CreateGameComponent implements OnInit {
   playerCounts = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'Unlimited'];
   categories: string[] = [];
   isCategoryDropdownOpen: boolean = false;
-  constructor(public translate: TranslateService, private router: Router) {}
+
+  constructor(
+    public translate: TranslateService,
+    private router: Router,
+    private createGameService: CreateGameService
+  ) {}
+
+  private apiUrl = environment.apiUrl + '/game-sessions';
 
   ngOnInit(): void {
     this.loadCategories(this.translate.currentLang);
@@ -77,24 +87,48 @@ export class CreateGameComponent implements OnInit {
   }
 
   createGame() {
-    console.log('🟢 Game Created With:', {
+    const winPoints = this.selectedWinPoints === 'Unlimited'
+      ? 'unlimited'
+      : Number(this.selectedWinPoints);
+
+    const playerCount = this.selectedPlayerCount === 'Unlimited'
+      ? 'unlimited'
+      : Number(this.selectedPlayerCount);
+
+    const request = {
       roomName: this.roomName,
-      points: this.selectedWinPoints,
-      players: this.selectedPlayerCount,
+      winPoints,
+      playerCount,
       categories: this.selectedCategories,
       difficulty: this.selectedDifficulty,
       questionType: this.selectedQuestionType,
       gameMode: this.gameMode,
-      timedOption: this.timedOption,
+      timerMode: this.timedOption,
       secondsPerQuestion: this.secondsPerQuestion
-    });
+    } as GameSessionCreateRequest;
 
-    const gameCode = 'ABC123'; // Ideally generated from backend
-    this.router.navigate(['/admin-dashboard'], {
-      queryParams: { code: gameCode }
+    console.log('🟢 Sending game creation request:', request);
+
+    this.createGameService.create(request).subscribe({
+      next: (response: any) => {
+        console.log('✅ Game created:', response);
+        const gameId = response.id;
+
+        const joinLink = `${window.location.origin}/join-game?code=${gameId}`;
+        console.log('🔗 Join link:', joinLink);
+
+        this.router.navigate(['/admin-dashboard'], {
+          queryParams: { code: gameId }
+        });
+
+        alert(`Game created! Share this link to invite players:\n\n${joinLink}`);
+      },
+      error: (error: any) => {
+        console.error('❌ Failed to create game:', error);
+        alert('Failed to create game session. Please try again.');
+      }
     });
   }
-
 
   toggleCategoryDropdown() {
     this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
@@ -103,5 +137,4 @@ export class CreateGameComponent implements OnInit {
   closeCategoryDropdown() {
     this.isCategoryDropdownOpen = false;
   }
-
 }

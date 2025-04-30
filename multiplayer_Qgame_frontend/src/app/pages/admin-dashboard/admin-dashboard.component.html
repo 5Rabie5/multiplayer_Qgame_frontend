@@ -4,22 +4,32 @@
     <!-- Game Info Card -->
     <div class="bg-white bg-opacity-70 rounded-3xl shadow-lg p-6">
       <h2 class="text-xl font-bold mb-2">{{ 'GAME_ROOM' | translate }}</h2>
-      <p class="text-green-800 mb-4">
+      <p class="text-green-800 mb-2">
         <strong>{{ 'CODE' | translate }}:</strong> {{ gameCode }}
       </p>
+
       <button
-        class="bg-yellow-300 hover:bg-yellow-400 text-green-900 px-5 py-2 rounded-xl font-semibold shadow transition"
+        class="bg-yellow-300 hover:bg-yellow-400 text-green-900 px-5 py-2 rounded-xl font-semibold shadow transition mb-2"
         (click)="copyCode()"
       >
         {{ 'COPY_CODE' | translate }}
       </button>
+
+      <!-- NEW: Copy Join Link -->
+      <button
+        class="bg-yellow-200 hover:bg-yellow-300 text-green-900 px-5 py-2 rounded-xl font-semibold shadow transition block w-full mt-2"
+        (click)="copyJoinLink()"
+      >
+        {{ 'COPY_JOIN_LINK' | translate }}
+      </button>
+
+      <!-- UPDATED: QR shows full join link -->
       <qrcode
-        [qrdata]="gameCode"
+        [qrdata]="'https://quiz.antiochorthodox.at/join-game?code=' + gameCode"
         [width]="150"
         [errorCorrectionLevel]="'M'"
-        class="mx-auto"
+        class="mx-auto mt-4"
       ></qrcode>
-
     </div>
 
     <!-- Player List Card -->
