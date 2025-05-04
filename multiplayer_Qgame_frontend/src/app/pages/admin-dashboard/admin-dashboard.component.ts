@@ -52,7 +52,8 @@ constructor(private route: ActivatedRoute) {
   });
 }
   copyJoinLink() {
-    const joinLink = `${window.location.origin}/join-game?code=${this.gameCode}`;
+    const joinLink = `${window.location.origin}/join?code=${this.gameCode}`;
+
     navigator.clipboard.writeText(joinLink);
     alert('Join link copied!');
   }

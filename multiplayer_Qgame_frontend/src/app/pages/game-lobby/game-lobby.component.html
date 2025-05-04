@@ -1,1 +1,51 @@
-<p>game-lobby works!</p>
+<!-- Background wrapper (optional for style) -->
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 px-4 py-8">
+
+  <div class="w-full max-w-3xl p-6 rounded-2xl backdrop-blur-md bg-white/30 shadow-2xl space-y-6 border border-white/40">
+
+    <!-- Game Session Info -->
+    <ng-container *ngIf="gameSession$ | async as session; else loading">
+      <h2 class="text-3xl font-bold text-white drop-shadow text-center">
+        Lobby: {{ session.roomName }}
+      </h2>
+
+      <ul class="text-white space-y-1">
+        <li><strong>Mode:</strong> {{ session.gameMode }}</li>
+        <li><strong>Difficulty:</strong> {{ session.difficulty }}</li>
+        <li><strong>Categories:</strong> {{ session.categories.join(', ') }}</li>
+        <li><strong>Player Limit:</strong> {{ session.playerCount }}</li>
+        <li><strong>Win Points:</strong> {{ session.winPoints }}</li>
+        <li *ngIf="session.timerMode">
+          <strong>Timer Mode:</strong> {{ session.timerMode }} ({{ session.secondsPerQuestion }}s)
+        </li>
+      </ul>
+    </ng-container>
+
+    <ng-template #loading>
+      <p class="text-white text-center">Loading game session...</p>
+    </ng-template>
+
+    <!-- Joined Players List -->
+    <ng-container *ngIf="players$ | async as players">
+      <h3 class="text-xl font-semibold text-white mt-6">Joined Players</h3>
+
+      <ul class="text-white space-y-1">
+        <li *ngFor="let player of players">
+          👤 {{ player.name }}
+          <span *ngIf="player.id === currentPlayerId">(You)</span>
+        </li>
+      </ul>
+
+      <!-- Start Game Button for Host -->
+      <div class="pt-6 text-center">
+        <button
+          *ngIf="players.length && isCreator(players)"
+          class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-xl shadow"
+          (click)="startGame()"
+        >
+          Start Game
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

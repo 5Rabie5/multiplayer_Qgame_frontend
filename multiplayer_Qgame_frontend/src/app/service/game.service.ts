@@ -3,15 +3,27 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GameSessionCreateRequest } from '../models/game-session-create-request.model';
 import { environment } from '../../environments/environment';
+import {GameSession} from '../models/GameSession';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  private apiUrl = environment.apiUrl + 'game-sessions';
+  private readonly apiUrl = `${environment.apiUrl}game-sessions`;
+
   constructor(private http: HttpClient) {}
-  createGameSession(gameData: GameSessionCreateRequest): Observable<any> {
-// alert("GameService      "    +  this.apiUrl )
-    return this.http.post<any>(this.apiUrl, gameData);
+
+  /**
+   * Create a new game session
+   */
+  createGameSession(gameData: GameSessionCreateRequest): Observable<GameSession> {
+    return this.http.post<GameSession>(this.apiUrl, gameData);
+  }
+
+  /**
+   * Get a session by its ID
+   */
+  getGameSessionById(id: string): Observable<GameSession> {
+    return this.http.get<GameSession>(`${this.apiUrl}/${id}`);
   }
 }

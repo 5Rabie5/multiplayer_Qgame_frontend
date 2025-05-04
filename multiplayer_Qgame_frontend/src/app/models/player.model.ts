@@ -1,8 +1,9 @@
 export interface Player {
   id: string;
   name: string;
-  language: 'en' | 'de' | 'ar';
-  score: number;
+  language: string;
+  gameSessionId?: string;
   avatarUrl?: string;
-  isReady: boolean;
+  color?: string;
+  characterId?: string;
 }

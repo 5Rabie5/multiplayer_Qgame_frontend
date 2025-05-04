@@ -1,82 +1,121 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-yellow-50 via-orange-50 to-green-100 px-4 py-6 text-green-900 font-sans">
-  <div class="bg-white/60 shadow-lg rounded-3xl p-8 w-full max-w-md text-center join-container">
+<div class="min-h-screen bg-gradient-to-b from-yellow-50 via-orange-50 to-green-100 px-4 py-6 text-green-900 font-sans">
+  <div class="max-w-xl mx-auto bg-white rounded-3xl shadow p-6">
+    <h2 class="text-2xl font-bold text-center mb-6">{{ 'JOIN_GAME' | translate }}</h2>
 
-    <!-- PLAYER NAME -->
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>{{ 'PLAYER_NAME' | translate }}</mat-label>
-      <input matInput [value]="playerName" (input)="onPlayerNameChange($event)" required />
-    </mat-form-field>
-
-    <!-- GAME CODE -->
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>{{ 'GAME_CODE' | translate }}</mat-label>
-      <input matInput [value]="gameCode" (input)="onGameCodeChange($event)" required />
-    </mat-form-field>
-
-    <!-- AVATAR UPLOAD -->
-    <div class="upload-avatar-section text-left">
-      <label class="block text-sm font-semibold mb-1">{{ 'UPLOAD_AVATAR' | translate }}</label>
-      <div class="upload-wrapper flex gap-2 items-center">
-        <button mat-raised-button color="primary" (click)="fileInput.click()">
-          {{ 'CHOOSE_FILE' | translate }}
-        </button>
-        <span class="file-name text-sm italic text-gray-500">{{ avatarFileName || ('NO_FILE_SELECTED' | translate) }}</span>
-        <input #fileInput type="file" accept="image/*" hidden (change)="onAvatarChange($event)" />
+    <form class="space-y-4">
+      <!-- Player Name -->
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'PLAYER_NAME' | translate }}</label>
+        <input
+          type="text"
+          [(ngModel)]="playerName"
+          name="playerName"
+          #nameInput
+          class="w-full rounded-xl border border-green-200 px-4 py-3 bg-yellow-50 text-green-900 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
+        />
       </div>
-    </div>
 
-    <!-- CHARACTER SELECT -->
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>{{ 'CHARACTER' | translate }}</mat-label>
-      <mat-select
-        [value]="selectedCharacterId"
-        (selectionChange)="selectCharacter($event.value)"
-        panelClass="custom-select-panel"
-      >
-        <mat-option value="">{{ 'SELECT_CHARACTER' | translate }}</mat-option>
-        <mat-option *ngFor="let character of characters" [value]="character.id">
-          <img [src]="character.image" class="avatar-icon" />
-          {{ character.name | translate }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Game Code -->
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'GAME_CODE' | translate }}</label>
+        <input
+          type="text"
+          [(ngModel)]="gameCode"
+          name="gameCode"
+          readonly
+          class="w-full rounded-xl border border-green-200 px-4 py-3 bg-yellow-100 text-green-900 opacity-70 cursor-not-allowed shadow-sm"
+        />
+      </div>
 
-    <!-- COLOR SELECT -->
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>{{ 'COLOR' | translate }}</mat-label>
-      <mat-select
-        [value]="selectedColor"
-        (selectionChange)="selectedColor = $event.value"
-        panelClass="custom-select-panel"
-      >
-        <mat-option value="">{{ 'SELECT_COLOR' | translate }}</mat-option>
-        <mat-option *ngFor="let color of colors" [value]="color">
-          {{ color | translate }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <!-- Language -->
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'LANGUAGE' | translate }}</label>
+        <select
+          [(ngModel)]="selectedLanguage"
+          name="selectedLanguage"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 bg-yellow-50 text-green-900 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
+        >
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="ar">العربية</option>
+        </select>
+      </div>
 
-    <!-- IMAGE PREVIEW -->
-    <div class="preview mt-4" *ngIf="avatarImage || selectedCharacterImage">
-      <img
-        [src]="avatarImage || selectedCharacterImage"
-        alt="Preview"
-        [ngStyle]="{
-          'border-color': selectedColor,
-          'border-width.px': 4
-        }"
-      />
-    </div>
+      <!-- Character Selection -->
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'CHARACTER' | translate }}</label>
+        <select
+          [(ngModel)]="selectedCharacterId"
+          name="selectedCharacterId"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 bg-yellow-50 text-green-900 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
+        >
+          <option [ngValue]="null">{{ 'UPLOAD_YOUR_OWN' | translate }}</option>
+          <option *ngFor="let char of characters" [ngValue]="char.id">
+            {{ char.name | translate }}
+          </option>
+        </select>
 
-    <!-- JOIN GAME BUTTON -->
-    <button
-      mat-raised-button
-      color="accent"
-      class="bg-yellow-200 hover:bg-yellow-300 text-green-900 font-semibold py-2 px-6 mt-6 rounded-xl shadow w-full"
-      [disabled]="!canJoin()"
-      (click)="joinGame()"
-    >
-      {{ 'JOIN_GAME' | translate }}
-    </button>
+        <!-- Character Preview -->
+        <div *ngIf="selectedCharacterId" class="flex items-center mt-2">
+          <ng-container *ngFor="let char of characters">
+            <div *ngIf="char.id === selectedCharacterId" class="flex items-center gap-2">
+              <img
+                [src]="char.image"
+                alt="Avatar"
+                class="w-10 h-10 rounded-full border-4"
+                [style.borderColor]="selectedColor || '#22c55e'" />
+              <span class="text-sm font-semibold">{{ char.name | translate }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Upload Avatar -->
+      <div class="mt-4">
+        <label class="block text-sm font-semibold mb-1">{{ 'UPLOAD_AVATAR' | translate }}</label>
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onAvatarChange($event)"
+          class="block w-full text-sm text-green-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:border-green-300 file:bg-yellow-100 file:text-green-900"
+        />
+      </div>
+
+      <!-- Color -->
+      <div>
+        <label class="block text-sm font-semibold mb-1">{{ 'CHOOSE_COLOR' | translate }}</label>
+        <select
+          [(ngModel)]="selectedColor"
+          name="selectedColor"
+          class="w-full rounded-xl border border-green-200 px-4 py-3 bg-yellow-50 text-green-900 focus:outline-none focus:ring-2 focus:ring-orange-300 shadow-sm"
+        >
+          <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+        </select>
+      </div>
+
+      <!-- Final Avatar Preview -->
+      <div *ngIf="avatarImage || selectedCharacterImage" class="flex flex-col items-center gap-2 mt-4">
+        <img
+          [src]="avatarImage || selectedCharacterImage"
+          alt="Selected Avatar"
+          class="w-24 h-24 rounded-full border-4"
+          [style.borderColor]="selectedColor || '#22c55e'" />
+        <span class="text-sm font-medium">
+  {{ selectedCharacterLabel | translate }}
+</span>
+      </div>
+
+      <!-- Join Button -->
+      <div class="text-center pt-4">
+        <button
+          type="button"
+          (click)="joinGame()"
+          [disabled]="!canJoin()"
+          class="w-full bg-yellow-300 hover:bg-yellow-400 text-green-900 px-6 py-3 rounded-2xl text-lg font-bold shadow transition-all"
+        >
+          {{ 'JOIN_GAME' | translate }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>
