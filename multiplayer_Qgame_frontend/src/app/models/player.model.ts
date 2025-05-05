@@ -1,9 +1,12 @@
+
 export interface Player {
-  id: string;
+  id?: string;
   name: string;
-  language: string;
-  gameSessionId?: string;
-  avatarUrl?: string;
+  avatar?: string;
   color?: string;
+  language?: string;
   characterId?: string;
+  gameSessionId?: string;
+  score?: number;
+  online?: boolean; // ✅ NEW
 }
