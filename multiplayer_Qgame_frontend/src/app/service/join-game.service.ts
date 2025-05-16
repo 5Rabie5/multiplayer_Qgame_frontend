@@ -9,7 +9,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class JoinGameService {
-
   private readonly apiUrl = `${environment.apiUrl}players`;
 
   constructor(private http: HttpClient) {}

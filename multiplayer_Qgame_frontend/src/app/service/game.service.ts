@@ -1,9 +1,12 @@
+
+
+// GameService
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GameSessionCreateRequest } from '../models/game-session-create-request.model';
 import { environment } from '../../environments/environment';
-import {GameSession} from '../models/GameSession';
+import { GameSession } from '../models/GameSession';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +16,10 @@ export class GameService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Create a new game session
-   */
   createGameSession(gameData: GameSessionCreateRequest): Observable<GameSession> {
     return this.http.post<GameSession>(this.apiUrl, gameData);
   }
 
-  /**
-   * Get a session by its ID
-   */
   getGameSessionById(id: string): Observable<GameSession> {
     return this.http.get<GameSession>(`${this.apiUrl}/${id}`);
   }

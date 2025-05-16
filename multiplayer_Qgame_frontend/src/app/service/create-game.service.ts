@@ -11,7 +11,6 @@ export class CreateGameService {
   constructor(private gameService: GameService) {}
 
   create(gameData: GameSessionCreateRequest): Observable<any> {
-    // Additional logic or preprocessing can go here if needed
     return this.gameService.createGameSession(gameData);
   }
 }
